@@ -1,0 +1,38 @@
+package com.reylar.aissistant.ui.theme
+
+import androidx.compose.ui.graphics.Color
+
+val Purple80 = Color(0xFFD0BCFF)
+val PurpleGrey80 = Color(0xFFCCC2DC)
+val Pink80 = Color(0xFFEFB8C8)
+
+val Purple40 = Color(0xFF6650a4)
+val PurpleGrey40 = Color(0xFF625b71)
+val Pink40 = Color(0xFF7D5260)
+
+val Purple200 = Color(0xFFBB86FC)
+val Primary = Color(0xFF0A3FFF)
+val PrimaryDark = Color(0xFF052080)
+val Secondary = Color(0xFFFFD12D)
+val SecondaryLight = Color(0xFFFFE896)
+val SecondaryDark = Color(0xFF806917)
+val Purple700 = Color(0xFF3700B3)
+val Teal200 = Color(0xFF03DAC5)
+val White000 = Color(0xFFFFFFFF)
+val Orange900 = Color(0xFFFFD12D)
+val Gray900 = Color(0xFF111827)
+val Gray800 = Color(0xFF1F2937)
+val Gray700 = Color(0xFF374151)
+val Gray600 = Color(0xFF4A5568)
+val Gray500 = Color(0xFF718096)
+val Gray400 = Color(0xFFA0AEC0)
+val Gray200 = Color(0xFFE2E8F0)
+val Gray100 = Color(0xFFEDF2F7)
+val Gray50 = Color(0xFFF7FAFC)
+val Gray300 = Color(0xFFCBD5E0)
+val SurfaceWhite = Color(0xFFF9F9F9)
+val Blue700 = Color(0xFF1D4ED8)
+val Blue200 = Color(0xFFBFDBFE)
+val Blue50 = Color(0xFFEFF6FF)
+val Rose700 = Color(0xFFBE123C)
+val Rose50 = Color(0xFFFFF1F2)
