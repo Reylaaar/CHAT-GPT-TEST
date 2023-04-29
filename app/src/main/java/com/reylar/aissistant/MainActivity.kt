@@ -8,6 +8,7 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -34,6 +35,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.contentDescription
@@ -42,6 +44,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
@@ -67,6 +70,12 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+
+        installSplashScreen().apply {
+
+        }
 
         setContent {
             val mainNavController = rememberAnimatedNavController()
@@ -120,15 +129,15 @@ fun MessageMenu() {
         messageViewModel.onScrollToItem(false)
     }
 
-    Column(
-        modifier = Modifier.padding(horizontal = 6.dp)
-    ) {
+    Column() {
         Text(
-            modifier = Modifier.align(Alignment.CenterHorizontally),
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(vertical = 5.dp),
             text = "Chat GPT-4",
             style = TextStyle(
                 fontFamily = MaterialTheme.typography.headlineLarge.fontFamily,
-                color = Blue700,
+                color = if (isSystemInDarkTheme()) White000 else Blue700,
                 fontWeight = FontWeight.Medium,
                 fontSize = 18.sp
             )
@@ -146,7 +155,7 @@ fun MessageMenu() {
                 .weight(1f)
                 .fillMaxSize()
                 .animateContentSize(),
-            contentPadding = PaddingValues(horizontal = 5.dp)
+            contentPadding = PaddingValues(horizontal = 7.dp)
         ) {
 
             items(messageState.messages.size) { index ->
@@ -169,13 +178,17 @@ fun MessageMenu() {
                 Text(
                     "Enter your question here...",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = Gray400,
+                    color = if (isSystemInDarkTheme()) Gray200 else Gray400,
                 )
             },
             value = messageViewModel.openMessageText,
             onValueChange = {
                 messageViewModel.onMessageTextChanged(it)
             },
+            style = TextStyle(
+                color = if (isSystemInDarkTheme()) Color.White else Gray700,
+                fontFamily = MaterialTheme.typography.bodyMedium.fontFamily,
+            )
         )
 
         SingleTapButton(
@@ -205,11 +218,6 @@ fun MessageMenu() {
 @Composable
 fun MessageUserItem(conversationResponse: ConversationResponse) {
 
-    Log.d(
-        "completion messageResponse",
-        "${conversationResponse}"
-    )
-
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -224,7 +232,7 @@ fun MessageUserItem(conversationResponse: ConversationResponse) {
                 fontWeight = FontWeight.Medium,
                 fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,
                 fontSize = 18.sp,
-                color = Gray700
+                color = if (isSystemInDarkTheme()) White000 else Gray700
             ),
         )
         //Message Context

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.AIssistant.MySplash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/aiassistant_logo</item>
+        <item name="postSplashScreenTheme">@style/Theme.AIssistant</item>
+    </style>
+
+</resources>
