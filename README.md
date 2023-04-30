@@ -24,8 +24,9 @@ https://user-images.githubusercontent.com/96094224/235343818-fd3b459d-f9e4-4ccf-
 ---
 
 **Design**
--- Dark Mode Theme
--- Material Theme 3 --
+
+- Dark Mode Theme
+- Material Theme 3
 
 <table>
   <tr>
