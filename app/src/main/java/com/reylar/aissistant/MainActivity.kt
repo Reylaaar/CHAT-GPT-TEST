@@ -1,13 +1,19 @@
+@file:OptIn(ExperimentalFoundationApi::class)
+
 package com.reylar.aissistant
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -31,15 +37,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -63,6 +72,7 @@ import com.reylar.aissistant.ui.theme.Gray700
 import com.reylar.aissistant.ui.theme.AIssistantTheme
 import com.reylar.aissistant.ui.theme.White000
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalAnimationApi::class)
@@ -124,7 +134,10 @@ fun MessageMenu() {
 
     LaunchedEffect(key1 = messageViewModel.animateScrollState) {
         if (messageState.messages.isNotEmpty()) {
-            scrollState.animateScrollToItem(messageState.messages.lastIndex)
+            scope.launch {
+                scrollState.animateScrollToItem(messageState.messages.lastIndex)
+            }
+
         }
         messageViewModel.onScrollToItem(false)
     }
@@ -164,7 +177,8 @@ fun MessageMenu() {
                 if (message.sender == "OpenAI") {
                     MessageAIItem(
                         conversationResponse = message,
-                        openMessageViewModel = messageViewModel
+                        openMessageViewModel = messageViewModel,
+                        context = context
                     )
                 } else {
                     MessageUserItem(conversationResponse = message)
@@ -269,8 +283,10 @@ fun MessageUserItem(conversationResponse: ConversationResponse) {
 @Composable
 fun MessageAIItem(
     conversationResponse: ConversationResponse,
-    openMessageViewModel: OpenMessageViewModel
+    openMessageViewModel: OpenMessageViewModel,
+    context : Context
 ) {
+    val clipboardManager = LocalClipboardManager.current
 
     Column(
         modifier = Modifier
@@ -339,7 +355,17 @@ fun MessageAIItem(
             ) {
                 Text(
                     modifier = Modifier
-                        .padding(start = 4.dp, end = 4.dp, top = 5.dp, bottom = 6.dp),
+                        .combinedClickable(
+                            onClick = {},
+                            onLongClick = {
+                                clipboardManager.setText(AnnotatedString(openMessageViewModel.formattedResponseText(conversationResponse.completionResponse.choices)))
+                                Toast.makeText(context, "Copied", Toast.LENGTH_SHORT).show()
+                            }
+                        )
+                        .padding(start = 4.dp,
+                            end = 4.dp,
+                            top = 5.dp,
+                            bottom = 6.dp),
                     text = openMessageViewModel.formattedResponseText(conversationResponse.completionResponse.choices),
                     style = TextStyle(
                         fontWeight = FontWeight.Medium,

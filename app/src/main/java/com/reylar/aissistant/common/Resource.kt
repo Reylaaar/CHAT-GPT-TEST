@@ -1,5 +1,6 @@
 package com.reylar.aissistant.common
 
+import android.accounts.NetworkErrorException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import java.io.IOException
@@ -21,6 +22,7 @@ suspend fun <T> safeApiCall(
         } catch (throwable: Throwable) {
             when (throwable) {
                 is IOException -> Resource.Error("Network Error")
+                is NetworkErrorException -> Resource.Error("Network Error")
                 else -> {
                     Resource.Error(throwable.message ?: "Something went wrong")
                 }
