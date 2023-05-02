@@ -17,9 +17,9 @@ This is an AI android application using OpenAI API.
 
 **PREVIEW**
 
-https://user-images.githubusercontent.com/96094224/235343818-fd3b459d-f9e4-4ccf-ae69-abee8f7f5ba7.mp4
 
-
+ <td><img alt="lightMode" width="400" height="800" src="https://user-images.githubusercontent.com/96094224/235676490-5aa1412a-b494-4273-97f6-0045df2305a4.gif"></td>
+   
 
 ---
 
