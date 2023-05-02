@@ -38,3 +38,8 @@ This is an AI android application using OpenAI API.
     <td><img "alt="darkMode" width="400" height="800" src="https://user-images.githubusercontent.com/96094224/235342438-f1e5e74f-48d8-44b9-b256-89dc90926127.jpg"></td>
   </tr>
 </table>
+
+--- 
+
+- CHATGPT Demo only ⁠•⁠‿⁠•  
+- **RR**
