@@ -56,12 +56,12 @@ android {
         dev {
             applicationIdSuffix = ".dev"
             buildConfigField "String", "OPENAI_URL", "\"https://api.openai.com/\""
-            buildConfigField "String", "AI_TOKEN", "\"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\""
+            buildConfigField "String", "AI_TOKEN", "\"YOUR_API_KEY_HERE\""
         }
 
         prod {
             buildConfigField "String", "OPENAI_URL", "\"https://api.openai.com/\""
-            buildConfigField "String", "AI_TOKEN", "\"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\""
+            buildConfigField "String", "AI_TOKEN", "\"YOUR_API_KEY_HERE\""
         }
     }
 }
