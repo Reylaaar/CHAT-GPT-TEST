@@ -70,6 +70,7 @@ import com.reylar.aissistant.ui.theme.Gray200
 import com.reylar.aissistant.ui.theme.Gray400
 import com.reylar.aissistant.ui.theme.Gray700
 import com.reylar.aissistant.ui.theme.AIssistantTheme
+import com.reylar.aissistant.ui.theme.Rose700
 import com.reylar.aissistant.ui.theme.White000
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -334,7 +335,36 @@ fun MessageAIItem(
                     ),
                 )
             }
+        }
 
+
+        if (conversationResponse.isError) {
+            Column(
+                modifier = Modifier
+                    .padding(top = 2.dp)
+                    .align(Alignment.Start)
+                    .clip(
+                        RoundedCornerShape(
+                            topStart = 0.dp,
+                            topEnd = 8.dp,
+                            bottomEnd = 8.dp,
+                            bottomStart = 8.dp
+                        )
+                    )
+                    .background(Gray100)
+            ) {
+                Text(
+                    modifier = Modifier
+                        .padding(horizontal = 4.dp, vertical = 5.dp),
+                    text = conversationResponse.message,
+                    style = TextStyle(
+                        fontWeight = FontWeight.Medium,
+                        fontFamily = MaterialTheme.typography.labelLarge.fontFamily,
+                        fontSize = 16.sp,
+                        color = Rose700
+                    ),
+                )
+            }
         }
 
         if (conversationResponse.completionResponse?.id?.isNotEmpty() == true) {

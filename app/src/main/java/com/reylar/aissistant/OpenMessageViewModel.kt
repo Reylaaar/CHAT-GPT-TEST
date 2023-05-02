@@ -1,5 +1,6 @@
 package com.reylar.aissistant
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -86,10 +87,20 @@ class OpenMessageViewModel @Inject constructor(
 
                 is Resource.Error -> {
 
+                    removeTypingText()
+
+                    val conversationResponse = ConversationResponse(
+                        sender = "OpenAI", message = "${response.message}",
+                        isError = true,
+                        completionResponse = CompletionResponse()
+                    )
+
                     _messageState.value = _messageState.value.copy(
+                        messages = _messageState.value.messages + listOf(conversationResponse),
                         isLoading = false,
                         error = "${response.message}",
                     )
+
                 }
             }
         }.launchIn(viewModelScope)
@@ -103,8 +114,8 @@ class OpenMessageViewModel @Inject constructor(
             completionResponse = CompletionResponse()
         )
 
-        _messageState.value = _messageState.value .copy(
-            messages = _messageState.value .messages + listOf(conversationUser),
+        _messageState.value = _messageState.value.copy(
+            messages = _messageState.value.messages + listOf(conversationUser),
         )
     }
 

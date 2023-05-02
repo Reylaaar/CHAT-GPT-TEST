@@ -6,5 +6,6 @@ data class ConversationResponse(
     val completionResponse: CompletionResponse? = null,
     val sender: String = "",
     val message: String = "",
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
+    val isError: Boolean = false
 )
