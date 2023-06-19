@@ -1,4 +1,4 @@
-﻿# AIssistant
+﻿# AIssistant (Chat-GPT)
 
 This is an AI android application using OpenAI API.
 
